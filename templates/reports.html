@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reported Issues</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Reported Issues</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Bank</th>
+                    <th>Issue</th>
+                    <th>Details</th>
+                    <th>Reported By</th>
+                    <th>Email</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for report in reports %}
+                <tr>
+                    <td>{{ report.bank }}</td>
+                    <td>{{ report.issue }}</td>
+                    <td>{{ report.details }}</td>
+                    <td>{{ report.name }}</td>
+                    <td>{{ report.email }}</td>
+                    <td>{{ report.timestamp }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('index') }}" class="back-btn">Go Back</a>
+    </div>
+</body>
+</html>
