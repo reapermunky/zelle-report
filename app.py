@@ -31,7 +31,6 @@ def submit_report():
     reports = load_reports()
     
     name = request.form.get("name", "Anonymous")
-    email = request.form.get("email", "N/A")
     bank = request.form.get("bank")
     issue = request.form.get("issue")
     details = request.form.get("details", "")
@@ -41,7 +40,6 @@ def submit_report():
 
     new_report = {
         "name": name,
-        "email": email,
         "bank": bank,
         "issue": issue,
         "details": details,
@@ -57,20 +55,8 @@ def submit_report():
 def reports():
     reports = load_reports()
 
-    # Remove emails before sending reports to the template
-    filtered_reports = [
-        {
-            "name": r["name"],
-            "bank": r["bank"],
-            "issue": r["issue"],
-            "details": r["details"],
-            "timestamp": r["timestamp"]
-        }
-        for r in reports
-    ]
-
-    return render_template("reports.html", reports=filtered_reports)
-
+    # No need to filter emails since they aren't saved anymore
+    return render_template("reports.html", reports=reports)
 
 if __name__ == '__main__':
     app.run(debug=True)
