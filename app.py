@@ -36,7 +36,7 @@ def submit_report():
     details = request.form.get("details", "")
 
     if not bank or not issue:
-        return "Bank and Issue are required fields.", 400
+        return render_template("error.html", message="Bank and Issue fields are required.")
 
     new_report = {
         "name": name,
@@ -49,7 +49,7 @@ def submit_report():
     reports.append(new_report)
     save_reports(reports)
 
-    return redirect(url_for("reports"))
+    return render_template("success.html")
 
 @app.route('/reports')
 def reports():
