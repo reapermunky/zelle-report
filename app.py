@@ -56,7 +56,21 @@ def submit_report():
 @app.route('/reports')
 def reports():
     reports = load_reports()
-    return render_template("reports.html", reports=reports)
+
+    # Remove emails before sending reports to the template
+    filtered_reports = [
+        {
+            "name": r["name"],
+            "bank": r["bank"],
+            "issue": r["issue"],
+            "details": r["details"],
+            "timestamp": r["timestamp"]
+        }
+        for r in reports
+    ]
+
+    return render_template("reports.html", reports=filtered_reports)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
